@@ -1,5 +1,0 @@
----
-"alpinejs": major
----
-
-Initial release
