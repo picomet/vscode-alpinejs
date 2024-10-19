@@ -1,0 +1,5 @@
+---
+"alpinejs": major
+---
+
+Initial release
