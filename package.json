@@ -1,0 +1,90 @@
+{
+  "name": "alpinejs",
+  "displayName": "Alpinejs Support",
+  "description": "The ultimate Alpinejs support",
+  "version": "0.0.0",
+  "publisher": "picomet",
+  "author": {
+    "name": "Al Mahdi"
+  },
+  "icon": "images/icon128.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/picomet/vscode-alpinejs"
+  },
+  "bugs": {
+    "url": "https://github.com/picomet/vscode-alpinejs/issues"
+  },
+  "sponsor": {
+    "url": "https://www.buymeacoffee.com/almahdi404"
+  },
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "alpinejs",
+    "highlighter",
+    "autocomplete"
+  ],
+  "scripts": {
+    "format": "prettier . -w",
+    "lint": "tsc --noEmit && eslint",
+    "esbuild-watch": "node esbuild.config.js watch",
+    "esbuild-build": "node esbuild.config.js build",
+    "webpack-watch-web": "webpack watch --mode development --devtool nosources-source-map",
+    "webpack-build-web": "webpack --mode production",
+    "build": "npm run esbuild-build && npm run webpack-build-web",
+    "v": "changeset version && npx -y synclockver",
+    "package": "npx -y @vscode/vsce package",
+    "publish": "npx -y ovsx publish --packagePath ./*.vsix && npx -y @vscode/vsce publish --packagePath ./*.vsix",
+    "release": "npm ci && npm run build && npm run package && npm run publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9",
+    "@types/node": "^20.16.13",
+    "@types/vscode": "^1.94.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.13.0",
+    "node-polyfill-webpack-plugin": "^4.0.0",
+    "prettier": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.10.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "activationEvents": [
+    "workspaceContains:**/*.html",
+    "workspaceContains:**/*.jinja",
+    "workspaceContains:**/*.twig"
+  ],
+  "main": "./out/extension.js",
+  "browser": "./out/extension.browser.js",
+  "contributes": {
+    "grammars": [
+      {
+        "scopeName": "text.html.alpinejs",
+        "path": "./syntaxes/html/html.alpinejs.tmLanguage.json",
+        "injectTo": [
+          "text.html.derivative",
+          "text.html.jinja",
+          "text.html.twig"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.inline.alpinejs": "javascript"
+        }
+      }
+    ],
+    "html": {
+      "customData": [
+        "./customData/html.json"
+      ]
+    },
+    "keybindings": [],
+    "snippets": []
+  }
+}
